@@ -30,11 +30,9 @@ class MainPage extends Component {
 
     if (taskIndex < 0) {
       this.setState({ tasks: [task, ...this.state.tasks] });
-      console.log("added");
     } else {
       taskArr[taskIndex] = task;
       this.setState({ tasks: taskArr });
-      console.log("Edited");
     }
   };
   handleDateFormat = date => {
@@ -59,6 +57,20 @@ class MainPage extends Component {
         date.getFullYear();
       return time;
     }
+  };
+  handleEditState = (id, stateId) => {
+    console.log("this id is " + id + " and stateId is " + stateId);
+    let taskArr = [...this.state.tasks];
+    const taskIndex = taskArr.findIndex(t => t.id.toString() === id);
+
+    if (stateId === "dr1") {
+      taskArr[taskIndex].state = "План";
+    } else if (stateId === "dr2") {
+      taskArr[taskIndex].state = "В процессе";
+    } else if (stateId === "dr3") {
+      taskArr[taskIndex].state = "Выполнен";
+    }
+    this.setState({ tasks: taskArr });
   };
   render() {
     const { selectedStatus, tasks, statuses } = this.state;
@@ -85,7 +97,16 @@ class MainPage extends Component {
                 />
               )}
             />
-            <Route exact path="/main/scrum" component={Scrum} />
+            <Route
+              exact
+              path="/main/scrum"
+              component={() => (
+                <Scrum
+                  tasks={this.state.tasks}
+                  stateEdit={this.handleEditState}
+                />
+              )}
+            />
             <Route
               exact
               path="/main/:task"
