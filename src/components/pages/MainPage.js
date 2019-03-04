@@ -59,18 +59,25 @@ class MainPage extends Component {
     }
   };
   handleEditState = (id, stateId) => {
-    console.log("this id is " + id + " and stateId is " + stateId);
     let taskArr = [...this.state.tasks];
     const taskIndex = taskArr.findIndex(t => t.id.toString() === id);
 
     if (stateId === "dr1") {
-      taskArr[taskIndex].state = "План";
+      if (taskArr[taskIndex].state !== "План") {
+        taskArr[taskIndex].state = "План";
+        this.setState({ tasks: taskArr });
+      }
     } else if (stateId === "dr2") {
-      taskArr[taskIndex].state = "В процессе";
+      if (taskArr[taskIndex].state !== "В процессе") {
+        taskArr[taskIndex].state = "В процессе";
+        this.setState({ tasks: taskArr });
+      }
     } else if (stateId === "dr3") {
-      taskArr[taskIndex].state = "Выполнен";
+      if (taskArr[taskIndex].state !== "Выполнен") {
+        taskArr[taskIndex].state = "Выполнен";
+        this.setState({ tasks: taskArr });
+      }
     }
-    this.setState({ tasks: taskArr });
   };
   render() {
     const { selectedStatus, tasks, statuses } = this.state;

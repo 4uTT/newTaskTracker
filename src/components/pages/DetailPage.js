@@ -171,12 +171,18 @@ class DetailPage extends Component {
             </Typography>
           </RowRight>
         </Row>
-        <SimpleModal
-          btnOuter="Редактировать"
-          btnInner="Сохранить"
-          task={task}
-          addTasks={this.props.addTasks}
-        />
+
+        <Row>
+          <RowLeft />
+          <RowRight>
+            <SimpleModal
+              btnOuter="Редактировать"
+              btnInner="Сохранить"
+              task={task}
+              addTasks={this.props.addTasks}
+            />
+          </RowRight>
+        </Row>
       </Container>
     );
   }
