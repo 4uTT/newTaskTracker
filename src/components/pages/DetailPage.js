@@ -162,7 +162,7 @@ class DetailPage extends Component {
         <Row>
           <RowLeft>
             <Typography variant="h5" gutterBottom style={textAlign}>
-              Потрачанное время:
+              Затраченное время:
             </Typography>
           </RowLeft>
           <RowRight>
@@ -175,6 +175,7 @@ class DetailPage extends Component {
           btnOuter="Редактировать"
           btnInner="Сохранить"
           task={task}
+          addTasks={this.props.addTasks}
         />
       </Container>
     );

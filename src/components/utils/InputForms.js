@@ -103,6 +103,13 @@ class InputFroms extends React.Component {
       }
     }
   };
+  handleTitle = () => {
+    if (this.props.task) {
+      return "Форма для редактирования задачи";
+    } else {
+      return "Форма для добавления новой задачи";
+    }
+  };
   componentDidMount() {
     if (this.props.task) {
       const { task } = this.props;
@@ -143,12 +150,12 @@ class InputFroms extends React.Component {
     }
   }
   render() {
-    const { classes, btnInner, task } = this.props;
+    const { classes, btnInner } = this.props;
 
     return (
       <>
         <Typography variant="h4" gutterBottom>
-          Форма для добавления новой задачи
+          {this.handleTitle()}
         </Typography>
         <form className={classes.container}>
           <FormControl

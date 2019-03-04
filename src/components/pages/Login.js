@@ -69,7 +69,9 @@ class SignIn extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+    auth.logout(() => {
+      console.log("Log outed");
+    });
     return (
       <main className={classes.main}>
         <CssBaseline />

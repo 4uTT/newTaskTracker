@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import auth from "../utils/auth";
-import { Link, Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Scrum from "../tabs/scrum";
 import data from "../storage/tasks";
 import TableContainer from "../common/TableContainer";
@@ -25,10 +25,20 @@ class MainPage extends Component {
     this.setState({ selectedStatus: status });
   };
   handleAddTask = task => {
-    this.setState({ tasks: [task, ...this.state.tasks] });
+    let taskArr = [...this.state.tasks];
+    const taskIndex = taskArr.findIndex(t => t.id === task.id);
+
+    if (taskIndex < 0) {
+      this.setState({ tasks: [task, ...this.state.tasks] });
+      console.log("added");
+    } else {
+      taskArr[taskIndex] = task;
+      this.setState({ tasks: taskArr });
+      console.log("Edited");
+    }
   };
   handleDateFormat = date => {
-    if (date.getTime() == 0) {
+    if (date.getTime() === 0) {
       return "--";
     } else {
       function checkTime(i) {
@@ -53,7 +63,7 @@ class MainPage extends Component {
   render() {
     const { selectedStatus, tasks, statuses } = this.state;
     const filteredTasks =
-      selectedStatus && selectedStatus != "Все задачи"
+      selectedStatus && selectedStatus !== "Все задачи"
         ? tasks.filter(m => m.state === selectedStatus)
         : tasks;
     if (auth.isAuthenticated()) {
@@ -84,6 +94,7 @@ class MainPage extends Component {
                   store={m}
                   tasks={this.handleToDate(filteredTasks)}
                   dateFormat={this.handleDateFormat}
+                  addTasks={this.handleAddTask}
                 />
               )}
             />
