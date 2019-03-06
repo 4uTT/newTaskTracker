@@ -43,7 +43,7 @@ const styles = theme => ({
   }
 });
 
-class InputFroms extends React.Component {
+class InputForms extends React.Component {
   state = {
     priority: "",
     description: "",
@@ -65,7 +65,8 @@ class InputFroms extends React.Component {
         deadLine,
         state,
         priority,
-        dateOfStart: new Date(),
+        dateOfStart: this.props.task.dateOfStart,
+        dateOfFinish: this.props.task.dateOfFinish,
         id: this.props.task.id
       };
       if (
@@ -236,7 +237,7 @@ class InputFroms extends React.Component {
             />
           </FormControl>
         </form>
-        <Button className={classes.btn} onClick={() => this.handleSend()}>
+        <Button className={classes.btn} onClick={this.handleSend}>
           {btnInner}
         </Button>
       </>
@@ -244,8 +245,8 @@ class InputFroms extends React.Component {
   }
 }
 
-InputFroms.propTypes = {
+InputForms.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(InputFroms);
+export default withStyles(styles)(InputForms);

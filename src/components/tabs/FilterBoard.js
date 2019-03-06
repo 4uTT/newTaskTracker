@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 import SimpleModal from "../utils/Modal";
 
@@ -7,7 +7,6 @@ const Wrapper = styled.div`
   margin-right: 20px;
 `;
 const ListWrap = styled.ul`
-  style-list: none;
   padding: 0;
   margin: 0;
   border-radius: 5px;
@@ -18,7 +17,7 @@ const ListWrap = styled.ul`
 `;
 const ListItem = styled.li`
   list-style: none;
-  align-item: center;
+  align-items: center;
   line-height: 48px;
   padding-left: 10px;
   cursor: pointer;
@@ -36,34 +35,30 @@ const active = {
   color: "white"
 };
 
-class FilterBoard extends Component {
-  state = {};
-  render() {
-    const { onItemSelect, statuses, selectedStatus } = this.props;
-    return (
-      <Wrapper>
-        <ListWrap>
-          {statuses.map(m => {
-            return (
-              <ListItem
-                className={m === selectedStatus ? "active" : "passive"}
-                onClick={() => onItemSelect(m)}
-                key={"i" + statuses.indexOf(m)}
-                style={m === selectedStatus ? active : {}}
-              >
-                {m}
-              </ListItem>
-            );
-          })}
-        </ListWrap>
-        <SimpleModal
-          addTasks={this.props.addTasks}
-          btnOuter="Добавить задачу"
-          btnInner="Добавить"
-        />
-      </Wrapper>
-    );
-  }
-}
+const FilterBoard = ({ onItemSelect, statuses, selectedStatus, addTasks }) => {
+  return (
+    <Wrapper>
+      <ListWrap>
+        {statuses.map((m, i) => {
+          return (
+            <ListItem
+              className={m === selectedStatus ? "active" : "passive"}
+              onClick={() => onItemSelect(m)}
+              key={i}
+              style={m === selectedStatus ? active : {}}
+            >
+              {m}
+            </ListItem>
+          );
+        })}
+      </ListWrap>
+      <SimpleModal
+        addTasks={addTasks}
+        btnOuter="Добавить задачу"
+        btnInner="Добавить"
+      />
+    </Wrapper>
+  );
+};
 
 export default FilterBoard;

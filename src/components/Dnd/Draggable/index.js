@@ -1,27 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default class Draggable extends React.Component {
-  drag = e => {
+const Draggable = props => {
+  const drag = e => {
     e.dataTransfer.setData("transfer", e.target.id);
   };
-  nowAllowDrop = e => {
+  const nowAllowDrop = e => {
     e.stopPropagation();
   };
-  render() {
-    return (
-      <div
-        id={this.props.id}
-        draggable="true"
-        onDragStart={this.drag}
-        onDragOver={this.nowAllowDrop}
-        style={this.props.style}
-      >
-        {this.props.children}
-      </div>
-    );
-  }
-}
+
+  return (
+    <div
+      id={props.id}
+      draggable="true"
+      onDragStart={drag}
+      onDragOver={nowAllowDrop}
+      style={props.style}
+    >
+      {props.children}
+    </div>
+  );
+};
+
+export default Draggable;
 
 Draggable.propTypes = {
   id: PropTypes.string,

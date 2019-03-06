@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -46,7 +46,7 @@ const styles = theme => ({
   }
 });
 
-class SignIn extends React.Component {
+class SignIn extends Component {
   state = {
     email: "",
     password: "",
@@ -58,6 +58,7 @@ class SignIn extends React.Component {
     this.setState({ [name]: value });
   };
   onSubmit = e => {
+    e.preventDefault();
     const { email, password } = this.state;
 
     if (checkAuth(email, password)) {
@@ -82,7 +83,7 @@ class SignIn extends React.Component {
           <Typography component="h1" variant="h5">
             Вход
           </Typography>
-          <form className={classes.form}>
+          <form className={classes.form} onSubmit={this.onSubmit}>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email адрес</InputLabel>
               <Input
@@ -105,12 +106,11 @@ class SignIn extends React.Component {
             </FormControl>
 
             <Button
-              type="button"
+              type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={this.onSubmit}
             >
               Войти
             </Button>

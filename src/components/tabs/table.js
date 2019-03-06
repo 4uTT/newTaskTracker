@@ -61,48 +61,44 @@ const rows = [
   { id: "priority", numeric: true, disablePadding: false, label: "Приоритет" }
 ];
 
-class EnhancedTableHead extends React.Component {
-  createSortHandler = property => event => {
-    this.props.onRequestSort(event, property);
+const EnhancedTableHead = ({ onRequestSort, order, orderBy }) => {
+  const createSortHandler = property => event => {
+    onRequestSort(event, property);
   };
 
-  render() {
-    const { order, orderBy } = this.props;
-
-    return (
-      <TableHead style={{ background: "#2196f3" }}>
-        <TableRow>
-          {rows.map(
-            row => (
-              <TableCell
-                key={row.id}
-                align={row.numeric ? "right" : "left"}
-                padding={row.disablePadding ? "none" : "default"}
-                sortDirection={orderBy === row.id ? order : false}
+  return (
+    <TableHead style={{ background: "#2196f3" }}>
+      <TableRow>
+        {rows.map(
+          row => (
+            <TableCell
+              key={row.id}
+              align={row.numeric ? "right" : "left"}
+              padding={row.disablePadding ? "none" : "default"}
+              sortDirection={orderBy === row.id ? order : false}
+            >
+              <Tooltip
+                title="Sort"
+                placement={row.numeric ? "bottom-end" : "bottom-start"}
+                enterDelay={300}
               >
-                <Tooltip
-                  title="Sort"
-                  placement={row.numeric ? "bottom-end" : "bottom-start"}
-                  enterDelay={300}
+                <TableSortLabel
+                  style={{ paddingLeft: "20px", color: "#fff" }}
+                  active={orderBy === row.id}
+                  direction={order}
+                  onClick={createSortHandler(row.id)}
                 >
-                  <TableSortLabel
-                    style={{ paddingLeft: "20px", color: "#fff" }}
-                    active={orderBy === row.id}
-                    direction={order}
-                    onClick={this.createSortHandler(row.id)}
-                  >
-                    {row.label}
-                  </TableSortLabel>
-                </Tooltip>
-              </TableCell>
-            ),
-            this
-          )}
-        </TableRow>
-      </TableHead>
-    );
-  }
-}
+                  {row.label}
+                </TableSortLabel>
+              </Tooltip>
+            </TableCell>
+          ),
+          this
+        )}
+      </TableRow>
+    </TableHead>
+  );
+};
 
 EnhancedTableHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
