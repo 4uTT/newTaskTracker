@@ -185,7 +185,7 @@ class EnhancedTable extends React.Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   render() {
-    const { classes } = this.props;
+    const { classes, dateFormat } = this.props;
     const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
@@ -227,10 +227,10 @@ class EnhancedTable extends React.Component {
                         <Link to={`/main/${n.id}`}>{n.title}</Link>
                       </TableCell>
                       <TableCell align="right">
-                        {this.props.dateFormat(n.dateOfStart)}
+                        {dateFormat(n.dateOfStart)}
                       </TableCell>
                       <TableCell align="right">
-                        {this.props.dateFormat(n.deadLine)}
+                        {dateFormat(n.deadLine)}
                       </TableCell>
                       <TableCell align="right">{n.state}</TableCell>
                       <TableCell align="right">{n.priority}</TableCell>

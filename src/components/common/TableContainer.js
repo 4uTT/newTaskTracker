@@ -1,5 +1,5 @@
 import React from "react";
-import EnhancedTable from "../tabs/Table";
+import EnhancedTable from "../tabs/table";
 import FilterBoard from "../tabs/FilterBoard";
 import styled from "styled-components";
 

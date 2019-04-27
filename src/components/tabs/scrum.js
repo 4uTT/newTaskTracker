@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Draggable from "../dnd/draggable";
-import Droppable from "../dnd/droppable";
+import Draggable from "../Dnd/Draggable";
+import Droppable from "../Dnd/Droppable";
 import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import Scrum from "../tabs/Scrum";
+import Scrum from "../tabs/scrum";
 import data from "../storage/tasks";
 import TableContainer from "../common/TableContainer";
 import DetailPage from "./DetailPage";
 import AppBar from "../common/AppBar";
+import * as moment from "moment";
 
 class MainPage extends Component {
   state = {
@@ -42,23 +43,7 @@ class MainPage extends Component {
     if (date.getTime() === 0) {
       return "--";
     } else {
-      function checkTime(i) {
-        if (i < 10) {
-          i = "0" + i;
-        }
-        return i;
-      }
-      let time =
-        checkTime(date.getHours()) +
-        ":" +
-        checkTime(date.getMinutes()) +
-        " " +
-        checkTime(date.getDate()) +
-        "." +
-        checkTime(date.getUTCMonth() + 1) +
-        "." +
-        date.getFullYear();
-      return time;
+      return moment(date).format("D MMM YYYY hh:mm ");
     }
   };
   handleEditState = (id, stateId) => {
